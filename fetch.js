@@ -1,6 +1,8 @@
 let postsContainer = document.querySelector('#fetchPosts')
 const fetchPostsBtn = document.querySelector('#fetchBtn')
+const postDataBtn = document.querySelector('#postDataBtn')
 const url = 'https://jsonplaceholder.typicode.com/posts';
+
 
 const getPosts = async () => {
 
@@ -49,6 +51,31 @@ const getPostsXHR = ()=>{
     }
     xhr.send();
 }
+
+const postData = async ()=>{
+    const postDataObject = {name: 'zakaria', age: 24};
+    try {
+        
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postDataObject)
+        });
+    
+        const data = await response.json()
+    
+        console.log(data)
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+postDataBtn.addEventListener('click', ()=>{
+    postData(url)
+})
 
 //xhr.setRequestHeader('Content-Type', 'application/json');
 
